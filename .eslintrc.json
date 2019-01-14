@@ -1,0 +1,30 @@
+{
+  "env": {
+    "browser": true,
+    "commonjs": true,
+    "es6": true,
+    "node": true
+  },
+  "extends": ["eslint:recommended", "airbnb", "plugin:react/recommended"],
+  "parser": "babel-eslint",
+  "parserOptions": {
+    "ecmaFeatures": {
+      "objectLiteralShorthandMethods": true,
+      "objectLiteralShorthandProperties": true,
+      "experimentalObjectRestSpread": true,
+      "jsx": true,
+      "modules": true
+    },
+    "ecmaVersion": 2018,
+    "sourceType": "module"
+  },
+  "rules": {
+    "indent": ["error", "tab"],
+    "linebreak-style": ["error", "unix"],
+    "quotes": ["error", "single"],
+    "semi": ["error", "never"],
+    "no-console": 0,
+    "react/jsx-filename-extension": 0,
+    "react/prefer-stateless-function": 0
+  }
+}
