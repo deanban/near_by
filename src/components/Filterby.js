@@ -9,8 +9,46 @@ export class Filterby extends Component {
 
 	render() {
 		return (
-			<div className="content-area-left">
-				<h2>content1</h2>
+			<div
+				className="card border-primary mb-3"
+				style={{ 'max-width': '20rem' }}
+			>
+				<article className="card-group-item">
+					<header className="card-header">
+						<h5 className="title">Filter by type </h5>
+					</header>
+
+					<div className="filter-content">
+						<div className="card-body ">
+							<label className="form-check">
+								<input
+									className="form-check-input"
+									type="radio"
+									name="exampleRadio"
+								/>
+								<span className="form-check-label">Restaurants</span>
+							</label>
+							<label className="form-check">
+								<input
+									className="form-check-input"
+									type="radio"
+									name="exampleRadio"
+									value=""
+								/>
+								<span className="form-check-label">Banks</span>
+							</label>
+							<label className="form-check">
+								<input
+									className="form-check-input"
+									type="radio"
+									name="exampleRadio"
+									value=""
+								/>
+								<span className="form-check-label">Parks</span>
+							</label>
+						</div>
+					</div>
+				</article>
 			</div>
 		)
 	}
