@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import GoogleMapReact from 'google-map-react'
+import keys from '../keys/keys.js'
 
 export default class MapContainer extends Component {
 	static defaultProps = {
@@ -17,7 +18,7 @@ export default class MapContainer extends Component {
 				<div style={{ height: '100vh', width: '100%' }}>
 					<GoogleMapReact
 						bootstrapURLKeys={{
-							key: 'AIzaSyAF3laRwdxS7LqBHaCP5UbQX-ZKOOTFPwE'
+							key: `${keys.google_maps}`
 						}}
 						defaultCenter={this.props.center}
 						defaultZoom={this.props.zoom}
