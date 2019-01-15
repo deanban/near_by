@@ -11,10 +11,10 @@
   /* grid-template-columns: 1fr 2fr 2fr 2fr; */
   grid-template-rows: 1fr 4fr;
   grid-template-areas:
-    "header"
-    "content-area-left"
-    "content-area-right"
-    "footer";
+    'header'
+    'content-area-left'
+    'content-area-right'
+    'footer';
 }
 
 .header {
@@ -55,12 +55,12 @@
     grid-template-columns: 1fr 1fr 3fr 2fr;
     grid-auto-rows: 0.5fr 6fr 0.5fr;
     grid-template-areas:
-      "header            header            header            header"
-      "content-area-left content-area-right content-area-right map"
-      "content-area-left content-area-right content-area-right map"
-      "content-area-left content-area-right content-area-right map"
-      "content-area-left content-area-right content-area-right map"
-      "footer             footer             footer             footer";
+      'header            header            header            header'
+      'content-area-left content-area-right content-area-right map'
+      'content-area-left content-area-right content-area-right map'
+      'content-area-left content-area-right content-area-right map'
+      'content-area-left content-area-right content-area-right map'
+      'footer             footer             footer             footer';
   }
 }
 
