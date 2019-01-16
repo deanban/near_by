@@ -3,8 +3,15 @@ import PropTypes from "prop-types";
 import { connect } from "react-redux";
 
 import Search from "./Search";
+import { setRadioFilter } from "../actions/FilterActions";
 
 export class Filterby extends Component {
+  handleRadioButton = event => {
+    const { setRadioFilter } = this.props;
+    const filterBy = event.target.value;
+    setRadioFilter(filterBy);
+  };
+
   render() {
     return (
       <div className="card border-primary mb-3" style={{ maxWidth: "20rem" }}>
@@ -20,6 +27,8 @@ export class Filterby extends Component {
                   className="form-check-input"
                   type="radio"
                   name="exampleRadio"
+                  value="restaurants"
+                  onClick={this.handleRadioButton}
                 />
                 <span className="form-check-label">Restaurants</span>
               </label>
@@ -28,7 +37,8 @@ export class Filterby extends Component {
                   className="form-check-input"
                   type="radio"
                   name="exampleRadio"
-                  value=""
+                  value="banks"
+                  onClick={this.handleRadioButton}
                 />
                 <span className="form-check-label">Banks</span>
               </label>
@@ -37,7 +47,8 @@ export class Filterby extends Component {
                   className="form-check-input"
                   type="radio"
                   name="exampleRadio"
-                  value=""
+                  value="parks"
+                  onClick={this.handleRadioButton}
                 />
                 <span className="form-check-label">Parks</span>
               </label>
@@ -57,4 +68,7 @@ export class Filterby extends Component {
 
 // }
 
-export default Filterby;
+export default connect(
+  null,
+  { setRadioFilter }
+)(Filterby);

@@ -23,10 +23,10 @@ export class Search extends Component {
     geocodeByAddress(address)
       .then(results => getLatLng(results[0]))
       .then(latLng => {
-        this.setState({
+        this.setState(state => ({
           lat: latLng.lat,
           lng: latLng.lng
-        });
+        }));
       })
       .then(_ => {
         const { address, lat, lng } = this.state;

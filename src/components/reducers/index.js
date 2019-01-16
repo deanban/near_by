@@ -1,6 +1,8 @@
 import { combineReducers } from "redux";
 import locationReducer from "./LocationReducer";
+import filterReducer from "./FilterReducer";
 
 export default combineReducers({
-  location: locationReducer
+  location: locationReducer,
+  filterBy: filterReducer
 });
