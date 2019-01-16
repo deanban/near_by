@@ -5,6 +5,8 @@ import PlacesAutocomplete, {
   geocodeByAddress,
   getLatLng
 } from "react-places-autocomplete";
+import Spinner from "../../Spinner";
+
 import { setAddress, setMercator } from "../actions/LocationActions";
 
 export class Search extends Component {
@@ -60,7 +62,7 @@ export class Search extends Component {
             />
 
             <div className="autocomplete-dropdown-container">
-              {loading && <div>Loading...</div>}
+              {loading && <Spinner />}
               {suggestions.map(suggestion => {
                 const className = suggestion.active
                   ? "suggestion-item--active"
