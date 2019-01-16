@@ -5,6 +5,7 @@ import PlacesAutocomplete, {
   geocodeByAddress,
   getLatLng
 } from "react-places-autocomplete";
+import { setAddress, setMercator } from "../actions/LocationActions";
 
 export class Search extends Component {
   state = {
@@ -26,6 +27,12 @@ export class Search extends Component {
           lat: latLng.lat,
           lng: latLng.lng
         });
+      })
+      .then(_ => {
+        const { address, lat, lng } = this.state;
+        const { setAddress, setMercator } = this.props;
+        setAddress(address);
+        setMercator({ lat, lng });
       })
       .catch(error =>
         this.setState({
@@ -92,4 +99,7 @@ Search.defaultProps = {
 
 // const mapDispatchToProps = {};
 
-export default Search;
+export default connect(
+  null,
+  { setAddress, setMercator }
+)(Search);

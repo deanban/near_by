@@ -7,7 +7,6 @@ import Sidebar from "./components/Sidebar/Sidebar";
 import ResultList from "./components/ResultList";
 import MapContainer from "./components/MapContainer";
 import Footer from "./components/Footer";
-
 import store from "./components/store/store";
 
 class App extends Component {
