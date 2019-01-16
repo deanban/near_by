@@ -2,17 +2,12 @@ import React, { Component } from "react";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
 
-export class Filterby extends Component {
-  static propTypes = {
-    prop: PropTypes
-  };
+import Search from "./Search";
 
+export class Filterby extends Component {
   render() {
     return (
-      <div
-        className="card border-primary mb-3"
-        style={{ "max-width": "20rem" }}
-      >
+      <div className="card border-primary mb-3" style={{ maxWidth: "20rem" }}>
         <article className="card-group-item">
           <header className="card-header">
             <h5 className="title">Filter by type </h5>
