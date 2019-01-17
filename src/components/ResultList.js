@@ -4,11 +4,6 @@ import { connect } from "react-redux";
 import { searchPlaces } from "./actions/SearchActions";
 
 class ResultList extends Component {
-  state = {
-    coords: null,
-    filterByType: null
-  };
-
   // static getDerivedStateFromProps(props, state) {
   //   if (
   //     props.coords !== state.prevCoords ||
