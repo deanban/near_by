@@ -1,6 +1,6 @@
 const initialState = {
   address: "",
-  coords: {}
+  coords: null
 };
 
 export default function locationReducer(state = initialState, action) {

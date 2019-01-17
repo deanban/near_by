@@ -97,7 +97,10 @@ Search.defaultProps = {
   loading: PropTypes.bool
 };
 
-// const mapStateToProps = state => ({});
+// const mapStateToProps = state => ({
+//   coords: state.location.coords,
+//   filterBy: state.filterBy.filterByType
+// });
 
 // const mapDispatchToProps = {};
 

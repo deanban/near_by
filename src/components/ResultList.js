@@ -1,10 +1,51 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
+import { connect } from "react-redux";
+import { searchPlaces } from "./actions/SearchActions";
 
-const Context = React.createContext();
+class ResultList extends Component {
+  state = {
+    coords: null,
+    filterByType: null
+  };
 
-export default class ResultList extends Component {
+  // static getDerivedStateFromProps(props, state) {
+  //   if (
+  //     props.coords !== state.prevCoords ||
+  //     state.prevFilterByType !== state.filterByType
+  //   ) {
+  //     const prevCoords = props.coords;
+  //     const prevFilterByType = state.filterByType;
+  //     return {
+  //       prevCoords,
+  //       prevFilterByType
+  //     };
+  //   }
+  //   return null;
+  // }
+
+  // componentDidUpdate(prevProps) {
+  //   console.log("​ResultList -> componentDidUpdate -> prevProps", prevProps);
+  //   const { coords, filterBy } = this.props;
+  //   console.log();
+  //   if (coords !== prevProps.coords) {
+  //     searchPlaces(coords, null);
+  //   }
+  //   if (coords === prevProps.coords) {
+  //     searchPlaces(coords, null);
+  //   }
+  //   if (filterBy !== prevProps.filterByType) {
+  //     searchPlaces(null, filterBy);
+  //   }
+  // }
+  // componentDidMount() {
+  //   const { coords, filterBy, searchPlaces } = this.props;
+  // }
+
   render() {
+    const { address, coords, filterBy, searchPlaces } = this.props;
+    searchPlaces(coords, filterBy);
+    // console.log("resultList");
     return (
       <div className="content-area-right">
         <div className="input-group has-danger">
@@ -24,7 +65,10 @@ export default class ResultList extends Component {
         <table className="primary table table-hover">
           <thead>
             <tr>
-              <th scope="col">Places</th>
+              <th scope="col">
+                {filterBy === null ? "Places" : filterBy.toUpperCase()} near{" "}
+                {address.toUpperCase()}
+              </th>
               <th scope="col">Distance</th>
             </tr>
           </thead>
@@ -53,3 +97,16 @@ export default class ResultList extends Component {
     );
   }
 }
+
+function mapStateToProps(state) {
+  return {
+    address: state.location.address,
+    coords: state.location.coords,
+    filterBy: state.filterBy.filterByType
+  };
+}
+
+export default connect(
+  mapStateToProps,
+  { searchPlaces }
+)(ResultList);

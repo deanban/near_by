@@ -4,12 +4,14 @@ import { connect } from "react-redux";
 
 import Search from "./Search";
 import { setRadioFilter } from "../actions/FilterActions";
+import { searchPlaces } from "../actions/SearchActions";
 
 export class Filterby extends Component {
   handleRadioButton = event => {
-    const { setRadioFilter } = this.props;
+    const { setRadioFilter, searchPlaces, coords } = this.props;
     const filterBy = event.target.value;
     setRadioFilter(filterBy);
+    searchPlaces(coords, filterBy);
   };
 
   render() {
@@ -27,7 +29,7 @@ export class Filterby extends Component {
                   className="form-check-input"
                   type="radio"
                   name="exampleRadio"
-                  value="restaurants"
+                  value="restaurant"
                   onClick={this.handleRadioButton}
                 />
                 <span className="form-check-label">Restaurants</span>
@@ -37,7 +39,27 @@ export class Filterby extends Component {
                   className="form-check-input"
                   type="radio"
                   name="exampleRadio"
-                  value="banks"
+                  value="coffee"
+                  onClick={this.handleRadioButton}
+                />
+                <span className="form-check-label">Coffee</span>
+              </label>
+              <label className="form-check">
+                <input
+                  className="form-check-input"
+                  type="radio"
+                  name="exampleRadio"
+                  value="bar"
+                  onClick={this.handleRadioButton}
+                />
+                <span className="form-check-label">Bars</span>
+              </label>
+              <label className="form-check">
+                <input
+                  className="form-check-input"
+                  type="radio"
+                  name="exampleRadio"
+                  value="bank"
                   onClick={this.handleRadioButton}
                 />
                 <span className="form-check-label">Banks</span>
@@ -47,7 +69,7 @@ export class Filterby extends Component {
                   className="form-check-input"
                   type="radio"
                   name="exampleRadio"
-                  value="parks"
+                  value="park"
                   onClick={this.handleRadioButton}
                 />
                 <span className="form-check-label">Parks</span>
@@ -60,15 +82,11 @@ export class Filterby extends Component {
   }
 }
 
-// const mapStateToProps = (state) => ({
-
-// })
-
-// const mapDispatchToProps = {
-
-// }
+const mapStateToProps = state => ({
+  coords: state.location.coords
+});
 
 export default connect(
-  null,
-  { setRadioFilter }
+  mapStateToProps,
+  { setRadioFilter, searchPlaces }
 )(Filterby);

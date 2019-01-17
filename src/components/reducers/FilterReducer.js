@@ -1,5 +1,5 @@
 const initialState = {
-  filterByType: ""
+  filterByType: null
 };
 
 export default function filterReducer(state = initialState, action) {
