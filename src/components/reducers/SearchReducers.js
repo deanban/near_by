@@ -87,6 +87,16 @@ export default function searchReducer(state = initialState, action) {
         parks: action.payload,
         fetchedParks: true
       };
+    case "CLEAR_PLACES":
+      return {
+        ...state,
+        recommendedPlaces: [],
+        restaurants: [],
+        coffee: [],
+        bars: [],
+        banks: [],
+        parks: []
+      };
     default:
       return state;
   }

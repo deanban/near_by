@@ -4,7 +4,7 @@ import { Provider } from "react-redux";
 
 import Header from "./components/Header/Header";
 import Sidebar from "./components/Sidebar/Sidebar";
-import ResultList from "./components/ResultList";
+import ResultContainer from "./components/ResultContainer";
 import MapContainer from "./components/MapContainer";
 import Footer from "./components/Footer";
 import store from "./components/store/store";
@@ -17,7 +17,7 @@ class App extends Component {
           <div className="wrapper">
             <Header />
             <Sidebar />
-            <ResultList />
+            <ResultContainer />
             <MapContainer />
             <Footer />
           </div>

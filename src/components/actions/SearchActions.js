@@ -67,7 +67,14 @@ function fetchedParks(parks) {
   };
 }
 
+function clearPlaces() {
+  return {
+    type: "CLEAR_PLACES"
+  };
+}
+
 export const searchPlaces = (coords, filterByType) => async dispatch => {
+  dispatch(clearPlaces());
   const version = new Date()
     .toISOString()
     .slice(0, 10)
