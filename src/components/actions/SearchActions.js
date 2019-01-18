@@ -67,7 +67,7 @@ function fetchedParks(parks) {
   };
 }
 
-export const searchPlaces = (coords, filterByType) => async dispatch => {
+export const searchPlaces = (coords, filterByType) => dispatch => {
   const version = new Date()
     .toISOString()
     .slice(0, 10)
@@ -76,14 +76,16 @@ export const searchPlaces = (coords, filterByType) => async dispatch => {
   if (coords !== null && filterByType !== null) {
     console.log("​coords !== null && filterByType !== null");
 
+    // format coords object
     const formattedCoords = Object.values(coords).join(",");
+
     if (filterByType === "restaurant") dispatch(fetchingRestaurants());
     if (filterByType === "coffee") dispatch(fetchingCoffee());
     if (filterByType === "bar") dispatch(fetchingBars());
     if (filterByType === "bank") dispatch(fetchingBanks());
     if (filterByType === "park") dispatch(fetchingParks());
 
-    await fetch(
+    fetch(
       `https://api.foursquare.com/v2/venues/search?ll=${formattedCoords}&client_id=${
         keys.foursq_client_id
       }&client_secret=${
@@ -111,7 +113,7 @@ export const searchPlaces = (coords, filterByType) => async dispatch => {
     console.log("​coords !== null && filterByType === null");
     dispatch(fetchingPlaces());
     const formattedCoords = Object.values(coords).join(",");
-    await fetch(
+    fetch(
       `https://api.foursquare.com/v2/venues/explore?ll=${formattedCoords}&client_id=${
         keys.foursq_client_id
       }&client_secret=${

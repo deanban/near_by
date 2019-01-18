@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
-import { searchPlaces } from "./actions/SearchActions";
+import Results from "./Results";
 
 class ResultList extends Component {
   state = {
@@ -57,18 +57,28 @@ class ResultList extends Component {
     return null;
   }
 
-  showPlaces = () => {};
+  /* chrome complains about using getSnapshot without
+  componentDidUpdate. But according to reactjs.org,
+  "componentDidUpdate lifecycle isn’t often needed,
+  but can be useful in cases like manually preserving
+  data during rerenders." */
+  // renderPlaces = () => {
+  //   const { places } = this.state;
+  //   if (places.type || places.type === "Recommended Places") {
+  //     places.items.forEach(item => (
+  //       <tbody>
+  //         <tr className="table-primary">
+  //           <th scope="row">{item.venue.name}</th>
+  //           <td>Column content</td>
+  //         </tr>
+  //       </tbody>
+  //     ));
+  //   }
+  // };
 
   render() {
     console.log("resultList State", this.state);
-    const {
-      address,
-      filterBy,
-      recommendedPlaces,
-      restaurants,
-      bars,
-      parks
-    } = this.props;
+    const { address, filterBy } = this.props;
     return (
       <table className="primary table table-hover">
         <thead>
@@ -88,32 +98,15 @@ class ResultList extends Component {
             <th scope="col">Distance</th>
           </tr>
         </thead>
-        <tbody>
-          <tr className="table-primary">
-            <th scope="row">
-              Lorem ipsum dolor sit amet consectetur adipisicing elit.
-              Molestias, enim.
-            </th>
-            <td>Column content</td>
-          </tr>
-          <tr className="table-secondary">
-            <th scope="row">Lorem ipsum dolor sit amet consectetur.</th>
-            <td>Column content</td>
-          </tr>
-          <tr className="table-primary">
-            <th scope="row">
-              Lorem ipsum dolor sit amet consectetur adipisicing elit.
-              Molestias, enim.
-            </th>
-            <td>Column content</td>
-          </tr>
-        </tbody>
+        {this.state.places.length > 0 && <Results places={this.state.places} />}
       </table>
     );
   }
 }
 
 ResultList.defaultProps = {
+  address: PropTypes.string,
+  filterBy: PropTypes.string,
   recommendedPlaces: PropTypes.array,
   restaurants: PropTypes.array,
   coffee: PropTypes.array,
@@ -123,8 +116,8 @@ ResultList.defaultProps = {
 };
 
 ResultList.propTypes = {
-  address: PropTypes.string.isRequired,
-  filterBy: PropTypes.string.isRequired,
+  address: PropTypes.string,
+  filterBy: PropTypes.string,
   recommendedPlaces: PropTypes.array,
   restaurants: PropTypes.array,
   coffee: PropTypes.array,

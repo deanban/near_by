@@ -36,13 +36,13 @@ class ResultContainer extends Component {
   //     searchPlaces(null, filterBy);
   //   }
   // }
-  // componentDidMount() {
-  //   const { coords, filterBy, searchPlaces } = this.props;
-  // }
+  componentDidMount() {
+    const { coords, filterBy, searchPlaces } = this.props;
+    // searchPlaces(coords, filterBy);
+  }
 
   render() {
     const { address, coords, filterBy, searchPlaces } = this.props;
-    searchPlaces(coords, filterBy);
 
     return (
       <div className="content-area-right">

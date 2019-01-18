@@ -8,6 +8,7 @@ import PlacesAutocomplete, {
 import Spinner from "../../Spinner";
 
 import { setAddress, setMercator } from "../actions/LocationActions";
+import { searchPlaces } from "../actions/SearchActions";
 
 export class Search extends Component {
   state = {
@@ -35,6 +36,12 @@ export class Search extends Component {
         const { setAddress, setMercator } = this.props;
         setAddress(address);
         setMercator({ lat, lng });
+        console.log("finished setting add and coords");
+      })
+      .then(() => {
+        const { searchPlaces } = this.props;
+        const { lat, lng } = this.state;
+        searchPlaces({ lat, lng }, null);
       })
       .catch(error =>
         this.setState({
@@ -45,7 +52,7 @@ export class Search extends Component {
 
   render() {
     const { address } = this.state;
-    console.log(this.state);
+    console.log(this.props);
     return (
       <PlacesAutocomplete
         value={address}
@@ -97,14 +104,25 @@ Search.defaultProps = {
   loading: PropTypes.bool
 };
 
-// const mapStateToProps = state => ({
-//   coords: state.location.coords,
-//   filterBy: state.filterBy.filterByType
-// });
+Search.propTypes = {
+  searchPlaces: PropTypes.func.isRequired
+};
 
-// const mapDispatchToProps = {};
+// Search.propTypes = {
+//   searchPlaces: PropTypes.func.isRequired,
+//   getInputProps: PropTypes.func,
+//   getSuggestionItemProps: PropTypes.func,
+//   suggestion: PropTypes.array,
+//   loading: PropTypes.bool,
+//   coords: PropTypes.object,
+//   filterBy: PropTypes.string || null
+// };
+
+// const mapStateToProps = state => ({
+//   coords: state.location.coords
+// });
 
 export default connect(
   null,
-  { setAddress, setMercator }
+  { setAddress, setMercator, searchPlaces }
 )(Search);
