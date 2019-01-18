@@ -4,23 +4,63 @@ import { connect } from "react-redux";
 import { searchPlaces } from "./actions/SearchActions";
 
 class ResultList extends Component {
-  showPlaces() {
-    for (let i = 0; i < arguments.length; i++) {
-      if (arguments[i].length > 0) {
-        arguments[i].forEach(arg => {
-          // console.log(arg);
-          if (arg.type && arg.type === "Recommended Places") {
-            arg.items.forEach(item => {
-              console.log(item.venue.name);
-            });
-          }
-          console.log(arg.name);
-        });
-      }
+  state = {
+    places: []
+  };
+
+  getSnapshotBeforeUpdate(prevProps) {
+    const {
+      recommendedPlaces,
+      restaurants,
+      coffee,
+      bars,
+      banks,
+      parks
+    } = this.props;
+    if (prevProps.recommendedPlaces !== recommendedPlaces) {
+      this.setState({ places: recommendedPlaces });
+      // returning a snapshot just in case I want to use..⬇
+      // componentDidUpdate in the future
+      return recommendedPlaces;
     }
+    if (prevProps.restaurants !== restaurants) {
+      this.setState({ places: restaurants });
+      // returning a snapshot just in case I want to use..⬇
+      // componentDidUpdate in the future
+      return restaurants;
+    }
+    if (prevProps.bars !== bars) {
+      this.setState({ places: bars });
+      // returning a snapshot just in case I want to use..⬇
+      // componentDidUpdate in the future
+      return bars;
+    }
+    if (prevProps.coffee !== coffee) {
+      this.setState({ places: coffee });
+      // returning a snapshot just in case I want to use..⬇
+      // componentDidUpdate in the future
+      return coffee;
+    }
+    if (prevProps.banks !== banks) {
+      this.setState({ places: banks });
+      // returning a snapshot just in case I want to use..⬇
+      // componentDidUpdate in the future
+      return banks;
+    }
+    if (prevProps.parks !== parks) {
+      this.setState({ places: parks });
+      // returning a snapshot just in case I want to use..⬇
+      // componentDidUpdate in the future
+      return parks;
+    }
+
+    return null;
   }
 
+  showPlaces = () => {};
+
   render() {
+    console.log("resultList State", this.state);
     const {
       address,
       filterBy,
@@ -44,7 +84,7 @@ class ResultList extends Component {
               }{" "}
               {address.toUpperCase()}
             </th>
-            {this.showPlaces(recommendedPlaces, restaurants, bars, parks)}
+            {/* this.showPlaces(recommendedPlaces, restaurants, bars, parks) */}
             <th scope="col">Distance</th>
           </tr>
         </thead>
@@ -72,6 +112,26 @@ class ResultList extends Component {
     );
   }
 }
+
+ResultList.defaultProps = {
+  recommendedPlaces: PropTypes.array,
+  restaurants: PropTypes.array,
+  coffee: PropTypes.array,
+  bars: PropTypes.array,
+  banks: PropTypes.array,
+  parks: PropTypes.array
+};
+
+ResultList.propTypes = {
+  address: PropTypes.string.isRequired,
+  filterBy: PropTypes.string.isRequired,
+  recommendedPlaces: PropTypes.array,
+  restaurants: PropTypes.array,
+  coffee: PropTypes.array,
+  bars: PropTypes.array,
+  banks: PropTypes.array,
+  parks: PropTypes.array
+};
 
 const mapStateToProps = state => ({
   recommendedPlaces: state.places.recommendedPlaces,
