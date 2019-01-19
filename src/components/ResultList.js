@@ -1,6 +1,5 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
-import memoize from "memoize-one";
 
 import { connect } from "react-redux";
 import Results from "./Results";
@@ -91,17 +90,6 @@ class ResultList extends Component {
     );
   }
 }
-
-ResultList.defaultProps = {
-  address: PropTypes.string,
-  filterBy: PropTypes.string,
-  recommendedPlaces: PropTypes.array,
-  restaurants: PropTypes.array,
-  coffee: PropTypes.array,
-  bars: PropTypes.array,
-  banks: PropTypes.array,
-  parks: PropTypes.array
-};
 
 ResultList.propTypes = {
   address: PropTypes.string,
