@@ -2,47 +2,11 @@ import React, { Component } from "react";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
 
-import { filter } from "rsvp";
 import ResultList from "./ResultList";
-import { searchPlaces } from "./actions/SearchActions";
 
 class ResultContainer extends Component {
-  // static getDerivedStateFromProps(props, state) {
-  //   if (
-  //     props.coords !== state.prevCoords ||
-  //     state.prevFilterByType !== state.filterByType
-  //   ) {
-  //     const prevCoords = props.coords;
-  //     const prevFilterByType = state.filterByType;
-  //     return {
-  //       prevCoords,
-  //       prevFilterByType
-  //     };
-  //   }
-  //   return null;
-  // }
-
-  // componentDidUpdate(prevProps) {
-  //   console.log("​ResultList -> componentDidUpdate -> prevProps", prevProps);
-  //   const { coords, filterBy } = this.props;
-  //   console.log();
-  //   if (coords !== prevProps.coords) {
-  //     searchPlaces(coords, null);
-  //   }
-  //   if (coords === prevProps.coords) {
-  //     searchPlaces(coords, null);
-  //   }
-  //   if (filterBy !== prevProps.filterByType) {
-  //     searchPlaces(null, filterBy);
-  //   }
-  // }
-  componentDidMount() {
-    const { coords, filterBy, searchPlaces } = this.props;
-    // searchPlaces(coords, filterBy);
-  }
-
   render() {
-    const { address, coords, filterBy, searchPlaces } = this.props;
+    const { address, filterBy } = this.props;
 
     return (
       <div className="content-area-right">
@@ -69,8 +33,7 @@ class ResultContainer extends Component {
 ResultContainer.propTypes = {
   address: PropTypes.string.isRequired,
   coords: PropTypes.object,
-  filterBy: PropTypes.string,
-  searchPlaces: PropTypes.func.isRequired
+  filterBy: PropTypes.string
 };
 
 function mapStateToProps(state) {
@@ -83,5 +46,5 @@ function mapStateToProps(state) {
 
 export default connect(
   mapStateToProps,
-  { searchPlaces }
+  null
 )(ResultContainer);

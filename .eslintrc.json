@@ -5,11 +5,8 @@
     "es6": true,
     "node": true
   },
-  "extends": [
-    "airbnb",
-    "plugin:prettier/recommended",
-    "plugin:react/recommended"
-  ],
+  "extends": ["airbnb", "prettier", "prettier/react"],
+  "plugins": ["react", "prettier"],
   "parser": "babel-eslint",
   "parserOptions": {
     "ecmaFeatures": {
@@ -23,11 +20,12 @@
     "sourceType": "module"
   },
   "rules": {
-    "indent": ["error", 2],
+    "indent": [2, 4],
     "linebreak-style": ["error", "unix"],
     "quotes": ["error", "double"],
     "semi": ["error", "always"],
     "no-console": 0,
+    "react/jsx-indent": [2, 4],
     "react/prefer-stateless-function": 0,
     "react/jsx-filename-extension": 0,
     "import/prefer-default-export": 0

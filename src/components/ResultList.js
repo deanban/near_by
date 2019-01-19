@@ -1,11 +1,18 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
+import memoize from "memoize-one";
+
 import { connect } from "react-redux";
 import Results from "./Results";
 
 class ResultList extends Component {
   state = {
-    places: []
+    places: [],
+    restaurant: [],
+    bar: [],
+    coffee: [],
+    bank: [],
+    park: []
   };
 
   getSnapshotBeforeUpdate(prevProps) {
@@ -17,6 +24,7 @@ class ResultList extends Component {
       banks,
       parks
     } = this.props;
+
     if (prevProps.recommendedPlaces !== recommendedPlaces) {
       this.setState({ places: recommendedPlaces });
       // returning a snapshot just in case I want to use..⬇
@@ -24,31 +32,31 @@ class ResultList extends Component {
       return recommendedPlaces;
     }
     if (prevProps.restaurants !== restaurants) {
-      this.setState({ places: restaurants });
+      this.setState({ restaurant: restaurants });
       // returning a snapshot just in case I want to use..⬇
       // componentDidUpdate in the future
       return restaurants;
     }
     if (prevProps.bars !== bars) {
-      this.setState({ places: bars });
+      this.setState({ bar: bars });
       // returning a snapshot just in case I want to use..⬇
       // componentDidUpdate in the future
       return bars;
     }
     if (prevProps.coffee !== coffee) {
-      this.setState({ places: coffee });
+      this.setState({ coffee });
       // returning a snapshot just in case I want to use..⬇
       // componentDidUpdate in the future
       return coffee;
     }
     if (prevProps.banks !== banks) {
-      this.setState({ places: banks });
+      this.setState({ bank: banks });
       // returning a snapshot just in case I want to use..⬇
       // componentDidUpdate in the future
       return banks;
     }
     if (prevProps.parks !== parks) {
-      this.setState({ places: parks });
+      this.setState({ park: parks });
       // returning a snapshot just in case I want to use..⬇
       // componentDidUpdate in the future
       return parks;
@@ -57,27 +65,7 @@ class ResultList extends Component {
     return null;
   }
 
-  /* chrome complains about using getSnapshot without
-  componentDidUpdate. But according to reactjs.org,
-  "componentDidUpdate lifecycle isn’t often needed,
-  but can be useful in cases like manually preserving
-  data during rerenders." */
-  // renderPlaces = () => {
-  //   const { places } = this.state;
-  //   if (places.type || places.type === "Recommended Places") {
-  //     places.items.forEach(item => (
-  //       <tbody>
-  //         <tr className="table-primary">
-  //           <th scope="row">{item.venue.name}</th>
-  //           <td>Column content</td>
-  //         </tr>
-  //       </tbody>
-  //     ));
-  //   }
-  // };
-
   render() {
-    console.log("resultList State", this.state);
     const { address, filterBy } = this.props;
     return (
       <table className="primary table table-hover">
@@ -98,7 +86,7 @@ class ResultList extends Component {
             <th scope="col">Distance</th>
           </tr>
         </thead>
-        {this.state.places.length > 0 && <Results places={this.state.places} />}
+        <Results results={this.state} />
       </table>
     );
   }
