@@ -64,7 +64,7 @@ export default class Results extends Component {
           </tbody>
         ));
       }
-      return this.state.places.map((place, i) => (
+      return (
         <tbody key={place.id}>
           <tr className="table-secondary">
             <th scope="row">{place.name}</th>
@@ -76,7 +76,7 @@ export default class Results extends Component {
             </td>
           </tr>
         </tbody>
-      ));
+      );
     });
 
   render() {
