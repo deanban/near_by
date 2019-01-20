@@ -6,24 +6,6 @@ export default class Results extends Component {
     places: []
   };
 
-  //   shouldComponentUpdate(nextProps, nextState) {
-
-  //       const propsChange = this.props.results.places !== nextProps.results.places;
-  //       const stateChange = this.state.places !== nextState.places;
-
-  //       return propsChange;
-  //   }
-
-  //   componentDidUpdate(prevProps, prevState){
-  //       console.log("​Results -> componentDidUpdate -> prevState", prevState);
-  //       console.log("​Results -> componentDidUpdate -> prevProps", prevProps);
-  //       console.log("​Results -> componentDidUpdate -> this.props", this.props);
-  //       if (this.props.results !== prevProps.results){
-  //           this.renderPlaces();
-  //       }
-
-  //   }
-
   getSnapshotBeforeUpdate(prevProps) {
     const { places, restaurant, bar, coffee, bank, park } = this.props.results;
 

@@ -90,7 +90,7 @@ export const searchPlaces = (coords, filterByType) => dispatch => {
         keys.foursq_client_id
       }&client_secret=${
         keys.foursq_client_secret
-      }&query=${filterByType}&radius=350&sortByDistance=1&limit=10&v=${version}`
+      }&query=${filterByType}&radius=350&sortByDistance=1&limit=25&v=${version}`
     )
       .then(result => result.json())
       .then(jsonData => {
@@ -118,7 +118,7 @@ export const searchPlaces = (coords, filterByType) => dispatch => {
         keys.foursq_client_id
       }&client_secret=${
         keys.foursq_client_secret
-      }&radius=350&sortByDistance=1&limit=10&v=${version}`
+      }&radius=350&sortByDistance=1&limit=25&v=${version}`
     )
       .then(result => result.json())
       .then(jsonData => {

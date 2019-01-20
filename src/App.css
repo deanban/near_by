@@ -1,67 +1,67 @@
 .App {
-  /* text-align: center; */
+    /* text-align: center; */
 }
 
 .wrapper {
-  min-height: 100vh;
-  max-width: 100%;
-  margin: 0 10px;
-  display: grid;
-  grid-gap: 10px;
-  /* grid-template-columns: 1fr 2fr 2fr 2fr; */
-  grid-template-rows: 1fr 4fr;
-  grid-template-areas:
-    "header"
-    "content-area-left"
-    "content-area-right"
-    "footer";
+    min-height: 100vh;
+    max-width: 100%;
+    margin: 0 10px;
+    display: grid;
+    grid-gap: 10px;
+    /* grid-template-columns: 1fr 2fr 2fr 2fr; */
+    grid-template-rows: 1fr 4fr;
+    grid-template-areas:
+        "header"
+        "content-area-left"
+        "content-area-right"
+        "footer";
 }
 
 .header {
-  grid-area: header;
-  position: relative;
-  border-radius: 5px;
+    grid-area: header;
+    position: relative;
+    border-radius: 5px;
 }
 
 .content-area-left {
-  grid-area: content-area-left;
-  text-align: left;
-  background: pink;
-  border-radius: 5px;
+    grid-area: content-area-left;
+    text-align: left;
+    background: pink;
+    border-radius: 5px;
 }
 
 .content-area-right {
-  grid-area: content-area-right;
-  text-align: left;
-  /* background: burlywood; */
-  border-radius: 5px;
+    grid-area: content-area-right;
+    text-align: left;
+    /* background: burlywood; */
+    border-radius: 5px;
 }
 
 .map {
-  grid-area: map;
-  /* background: blueviolet; */
-  border-radius: 5px;
+    grid-area: map;
+    /* background: blueviolet; */
+    border-radius: 5px;
 }
 
 .footer {
-  grid-area: footer;
-  background: rgb(197, 89, 89);
-  border-radius: 5px;
-  text-align: center;
+    grid-area: footer;
+    background: rgb(197, 89, 89);
+    border-radius: 5px;
+    text-align: center;
 }
 @media (min-width: 500px) {
-  .wrapper {
-    border-radius: 10px;
-    grid-template-columns: 1fr 1fr 3fr 2fr;
-    grid-auto-rows: 0.5fr 6fr 0.5fr;
-    grid-template-areas:
-      "header            header            header            header"
-      "content-area-left content-area-right content-area-right map"
-      "content-area-left content-area-right content-area-right map"
-      "content-area-left content-area-right content-area-right map"
-      "content-area-left content-area-right content-area-right map"
-      "footer             footer             footer             footer";
-  }
+    .wrapper {
+        border-radius: 10px;
+        grid-template-columns: 1fr 1fr 2fr 3fr;
+        grid-auto-rows: 0.5fr 6fr 0.5fr;
+        grid-template-areas:
+            "header            header            header            header"
+            "content-area-left content-area-right content-area-right map"
+            "content-area-left content-area-right content-area-right map"
+            "content-area-left content-area-right content-area-right map"
+            "content-area-left content-area-right content-area-right map"
+            "footer             footer             footer             footer";
+    }
 }
 
 /* *,
