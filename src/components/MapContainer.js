@@ -2,8 +2,11 @@ import React, { Component } from "react";
 import PropTypes from "prop-types";
 import GoogleMapReact from "google-map-react";
 import { connect } from "react-redux";
+import { Map, InfoWindow, Marker, GoogleApiWrapper } from "google-maps-react";
 import keys from "../keys/keys";
 import MapStyle from "./MapStyle";
+
+const AnyReactComponent = ({ text }) => <div>{text}</div>;
 
 class MapContainer extends Component {
   static defaultProps = {
@@ -30,7 +33,9 @@ class MapContainer extends Component {
             defaultCenter={center}
             defaultZoom={zoom}
             options={mapOptions}
-          />
+          >
+            <AnyReactComponent defaultCenter={center} text="My Marker" />
+          </GoogleMapReact>
         </div>
       </div>
     );
