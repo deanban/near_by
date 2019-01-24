@@ -16,6 +16,7 @@
     "react-router-dom": "^4.3.1",
     "react-scripts": "2.1.3",
     "redux": "^4.0.1",
+    "redux-devtools-extension": "^2.13.7",
     "redux-thunk": "^2.3.0",
     "styled-components": "^4.1.3"
   },
@@ -23,8 +24,7 @@
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
-    "eject": "react-scripts eject",
-    "precommit": "lint-staged"
+    "eject": "react-scripts eject"
   },
   "eslintConfig": {
     "extends": "react-app"
@@ -35,7 +35,5 @@
     "not ie <= 11",
     "not op_mini all"
   ],
-  "devDependencies": {
-    "redux-devtools-extension": "^2.13.7"
-  }
+  "devDependencies": {}
 }
