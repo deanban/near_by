@@ -5,7 +5,9 @@ import { connect } from 'react-redux';
 import keys from '../keys/keys';
 import MapStyle from './MapStyle';
 
-const AnyReactComponent = ({ text }) => <div>{text}</div>;
+const MarkerComponent = () => (
+  <i className="fa fa-2x fa-map-marker" aria-hidden="true" />
+);
 
 class MapContainer extends Component {
   static defaultProps = {
@@ -19,12 +21,69 @@ class MapContainer extends Component {
     },
   };
 
+  state = {
+    places: [],
+  };
+
+  getSnapshotBeforeUpdate(prevProps) {
+    const {
+      recommendedPlaces,
+      restaurants,
+      coffee,
+      bars,
+      banks,
+      parks,
+    } = this.props;
+
+    if (prevProps.recommendedPlaces !== recommendedPlaces) {
+      this.setState({ places: recommendedPlaces });
+    }
+    if (prevProps.restaurants !== restaurants) {
+      this.setState({ places: restaurants });
+    }
+    if (prevProps.bars !== bars) {
+      this.setState({ places: bars });
+    }
+    if (prevProps.coffee !== coffee) {
+      this.setState({ places: coffee });
+    }
+    if (prevProps.banks !== banks) {
+      this.setState({ places: banks });
+    }
+    if (prevProps.parks !== parks) {
+      this.setState({ places: parks });
+    }
+  }
+
+  renderMarkers = () => {
+    this.state.places.map(place => {
+      if (place.type || place.type === 'Recommended Places') {
+        return place.items.map(item => {
+          const RecItemCenter = {
+            lat: item.venue.location.lat,
+            lng: item.venue.location.lng,
+          };
+          return (
+            <MarkerComponent
+              key={item.venue.id}
+              defaultCenter={RecItemCenter}
+            />
+          );
+        });
+      }
+      const ItemCenter = {
+        lat: place.location.lat,
+        lng: place.location.lng,
+      };
+      return <MarkerComponent key={place.id} defaultCenter={ItemCenter} />;
+    });
+  };
+
   render() {
-    console.log('mapcontainer', this.props);
     const { center, zoom, mapOptions } = this.props;
     return (
       <div className="map ">
-        <div style={{ height: '100vh', width: '100%' }}>
+        <div style={{ height: '100%', width: '100%' }}>
           <GoogleMapReact
             bootstrapURLKeys={{
               key: `${keys.google_maps}`,
@@ -33,7 +92,7 @@ class MapContainer extends Component {
             defaultZoom={zoom}
             options={mapOptions}
           >
-            <AnyReactComponent defaultCenter={center} text="My Marker" />
+            {this.renderMarkers()}
           </GoogleMapReact>
         </div>
       </div>
@@ -45,6 +104,12 @@ MapContainer.propTypes = {
   center: PropTypes.object,
   zoom: PropTypes.number,
   mapOptions: PropTypes.object,
+  recommendedPlaces: PropTypes.array,
+  restaurants: PropTypes.array,
+  coffee: PropTypes.array,
+  bars: PropTypes.array,
+  banks: PropTypes.array,
+  parks: PropTypes.array,
 };
 
 const mapStateToProps = state => ({

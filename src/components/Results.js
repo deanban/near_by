@@ -1,9 +1,9 @@
-import React, { Component } from "react";
-import PropTypes from "prop-types";
+import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 
 export default class Results extends Component {
   state = {
-    places: []
+    places: [],
   };
 
   getSnapshotBeforeUpdate(prevProps) {
@@ -31,14 +31,14 @@ export default class Results extends Component {
 
   renderPlaces = () =>
     this.state.places.map((place, i) => {
-      if (place.type || place.type === "Recommended Places") {
+      if (place.type || place.type === 'Recommended Places') {
         return place.items.map((item, i) => (
           <tbody key={item.venue.id}>
             <tr className="table-secondary">
               <th scope="row">{item.venue.name}</th>
               <td>
                 <h6>
-                  {`${(item.venue.location.distance / 1609.344).toFixed(2)}`}{" "}
+                  {`${(item.venue.location.distance / 1609.344).toFixed(2)}`}{' '}
                   <cite>miles</cite>
                 </h6>
               </td>
@@ -52,7 +52,7 @@ export default class Results extends Component {
             <th scope="row">{place.name}</th>
             <td>
               <h6>
-                {`${(place.location.distance / 1609.344).toFixed(2)}`}{" "}
+                {`${(place.location.distance / 1609.344).toFixed(2)}`}{' '}
                 <cite>miles</cite>
               </h6>
             </td>
@@ -72,5 +72,5 @@ Results.propTypes = {
   coffee: PropTypes.array,
   bar: PropTypes.array,
   banks: PropTypes.array,
-  parks: PropTypes.array
+  parks: PropTypes.array,
 };

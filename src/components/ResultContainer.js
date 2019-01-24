@@ -1,8 +1,8 @@
-import React, { Component } from "react";
-import PropTypes from "prop-types";
-import { connect } from "react-redux";
+import React, { Component } from 'react';
+import PropTypes from 'prop-types';
+import { connect } from 'react-redux';
 
-import ResultList from "./ResultList";
+import ResultList from './ResultList';
 
 class ResultContainer extends Component {
   render() {
@@ -33,14 +33,14 @@ class ResultContainer extends Component {
 ResultContainer.propTypes = {
   address: PropTypes.string.isRequired,
   coords: PropTypes.object,
-  filterBy: PropTypes.string
+  filterBy: PropTypes.string,
 };
 
 function mapStateToProps(state) {
   return {
     address: state.location.address,
     coords: state.location.coords,
-    filterBy: state.filterBy.filterByType
+    filterBy: state.filterBy.filterByType,
   };
 }
 
