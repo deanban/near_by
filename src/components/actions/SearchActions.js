@@ -2,68 +2,68 @@ import keys from '../../keys/keys';
 
 function fetchingPlaces() {
   return {
-    type: 'FETCHING_PLACES',
+    type: 'FETCHING_PLACES'
   };
 }
 function fetchingRestaurants() {
   return {
-    type: 'FETCHING_RESTAURANTS',
+    type: 'FETCHING_RESTAURANTS'
   };
 }
 function fetchingBars() {
   return {
-    type: 'FETCHING_BARS',
+    type: 'FETCHING_BARS'
   };
 }
 function fetchingCoffee() {
   return {
-    type: 'FETCHING_COFFEE',
+    type: 'FETCHING_COFFEE'
   };
 }
 function fetchingBanks() {
   return {
-    type: 'FETCHING_BANKS',
+    type: 'FETCHING_BANKS'
   };
 }
 function fetchingParks() {
   return {
-    type: 'FETCHING_PARKS',
+    type: 'FETCHING_PARKS'
   };
 }
 function fetchedPlaces(recommendedPlaces) {
   return {
     type: 'FETCHED_PLACES',
-    payload: recommendedPlaces,
+    payload: recommendedPlaces
   };
 }
 function fetchedRestaurants(restaurants) {
   return {
     type: 'SEARCH_FOR_RESTAURANTS',
-    payload: restaurants,
+    payload: restaurants
   };
 }
 function fetchedCoffee(coffee) {
   return {
     type: 'SEARCH_FOR_COFFEE',
-    payload: coffee,
+    payload: coffee
   };
 }
 function fetchedBars(bars) {
   return {
     type: 'SEARCH_FOR_BARS',
-    payload: bars,
+    payload: bars
   };
 }
 function fetchedBanks(banks) {
   return {
     type: 'SEARCH_FOR_BANKS',
-    payload: banks,
+    payload: banks
   };
 }
 function fetchedParks(parks) {
   return {
     type: 'SEARCH_FOR_PARKS',
-    payload: parks,
+    payload: parks
   };
 }
 
