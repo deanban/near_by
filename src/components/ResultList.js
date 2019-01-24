@@ -1,8 +1,8 @@
-import React, { Component } from "react";
-import PropTypes from "prop-types";
+import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 
-import { connect } from "react-redux";
-import Results from "./Results";
+import { connect } from 'react-redux';
+import Results from './Results';
 
 class ResultList extends Component {
   state = {
@@ -11,7 +11,7 @@ class ResultList extends Component {
     bar: [],
     coffee: [],
     bank: [],
-    park: []
+    park: [],
   };
 
   getSnapshotBeforeUpdate(prevProps) {
@@ -21,7 +21,7 @@ class ResultList extends Component {
       coffee,
       bars,
       banks,
-      parks
+      parks,
     } = this.props;
 
     if (prevProps.recommendedPlaces !== recommendedPlaces) {
@@ -71,14 +71,14 @@ class ResultList extends Component {
         <thead>
           <tr>
             <th scope="col">
-              {filterBy === null ? "Places" : filterBy.toUpperCase()}
+              {filterBy === null ? 'Places' : filterBy.toUpperCase()}
               {
                 // eslint-disable-next-line
-              }{" "}
+              }{' '}
               near
               {
                 // eslint-disable-next-line
-              }{" "}
+              }{' '}
               {address.toUpperCase()}
             </th>
             {/* this.showPlaces(recommendedPlaces, restaurants, bars, parks) */}
@@ -99,7 +99,7 @@ ResultList.propTypes = {
   coffee: PropTypes.array,
   bars: PropTypes.array,
   banks: PropTypes.array,
-  parks: PropTypes.array
+  parks: PropTypes.array,
 };
 
 const mapStateToProps = state => ({
@@ -108,7 +108,7 @@ const mapStateToProps = state => ({
   coffee: state.places.coffee,
   bars: state.places.bars,
   banks: state.places.banks,
-  parks: state.places.parks
+  parks: state.places.parks,
 });
 
 export default connect(mapStateToProps)(ResultList);

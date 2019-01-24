@@ -1,4 +1,4 @@
-import React from "react";
+import React from 'react';
 
 const Footer = () => (
   <footer className="footer page-footer font-md text-white">
@@ -9,7 +9,7 @@ const Footer = () => (
         target="_black"
         href="https://p-d-banik.herokuapp.com"
       >
-        {" "}
+        {' '}
         Nearby
       </a>
     </div>

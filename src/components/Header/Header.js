@@ -1,5 +1,5 @@
-import React, { Component } from "react";
-import SearchWrapper from "./SearchWrapper";
+import React, { Component } from 'react';
+import SearchWrapper from './SearchWrapper';
 
 export class Header extends Component {
   render() {
@@ -29,7 +29,7 @@ export class Header extends Component {
                       placeholder="Search..."
                     />
                     <a href="#" className="search_icon">
-                      {"   "}
+                      {'   '}
                       <i className="fas fa-search" />
                     </a>
                   </div>

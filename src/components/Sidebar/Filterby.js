@@ -1,10 +1,10 @@
-import React, { Component } from "react";
-import PropTypes from "prop-types";
-import { connect } from "react-redux";
+import React, { Component } from 'react';
+import PropTypes from 'prop-types';
+import { connect } from 'react-redux';
 
-import Search from "./Search";
-import { setRadioFilter } from "../actions/FilterActions";
-import { searchPlaces } from "../actions/SearchActions";
+import Search from './Search';
+import { setRadioFilter } from '../actions/FilterActions';
+import { searchPlaces } from '../actions/SearchActions';
 
 export class Filterby extends Component {
   handleRadioButton = event => {
@@ -16,7 +16,7 @@ export class Filterby extends Component {
 
   render() {
     return (
-      <div className="card border-primary mb-3" style={{ maxWidth: "20rem" }}>
+      <div className="card border-primary mb-3" style={{ maxWidth: '20rem' }}>
         <article className="card-group-item">
           <header className="card-header">
             <h5 className="title">Filter by type </h5>
@@ -83,7 +83,7 @@ export class Filterby extends Component {
 }
 
 const mapStateToProps = state => ({
-  coords: state.location.coords
+  coords: state.location.coords,
 });
 
 export default connect(

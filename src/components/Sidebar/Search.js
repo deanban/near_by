@@ -1,21 +1,21 @@
-import React, { Component } from "react";
-import PropTypes from "prop-types";
-import { connect } from "react-redux";
+import React, { Component } from 'react';
+import PropTypes from 'prop-types';
+import { connect } from 'react-redux';
 import PlacesAutocomplete, {
   geocodeByAddress,
-  getLatLng
-} from "react-places-autocomplete";
-import Spinner from "../../Spinner";
+  getLatLng,
+} from 'react-places-autocomplete';
+import Spinner from '../../Spinner';
 
-import { setAddress, setMercator } from "../actions/LocationActions";
-import { searchPlaces } from "../actions/SearchActions";
+import { setAddress, setMercator } from '../actions/LocationActions';
+import { searchPlaces } from '../actions/SearchActions';
 
 export class Search extends Component {
   state = {
-    address: "",
+    address: '',
     lat: null,
     lng: null,
-    err: null
+    err: null,
   };
 
   handleChange = address => {
@@ -28,7 +28,7 @@ export class Search extends Component {
       .then(latLng => {
         this.setState(state => ({
           lat: latLng.lat,
-          lng: latLng.lng
+          lng: latLng.lng,
         }));
       })
       .then(_ => {
@@ -36,7 +36,7 @@ export class Search extends Component {
         const { setAddress, setMercator } = this.props;
         setAddress(address);
         setMercator({ lat, lng });
-        console.log("finished setting add and coords");
+        console.log('finished setting add and coords');
       })
       .then(() => {
         const { searchPlaces } = this.props;
@@ -45,7 +45,7 @@ export class Search extends Component {
       })
       .catch(error =>
         this.setState({
-          err: error
+          err: error,
         })
       );
   };
@@ -63,8 +63,8 @@ export class Search extends Component {
           <div>
             <input
               {...getInputProps({
-                placeholder: "Search Places ...",
-                className: "location-search-input"
+                placeholder: 'Search Places ...',
+                className: 'location-search-input',
               })}
             />
 
@@ -72,17 +72,17 @@ export class Search extends Component {
               {loading && <Spinner />}
               {suggestions.map(suggestion => {
                 const className = suggestion.active
-                  ? "suggestion-item--active"
-                  : "suggestion-item";
+                  ? 'suggestion-item--active'
+                  : 'suggestion-item';
                 // inline style for demonstration purpose
                 const style = suggestion.active
-                  ? { backgroundColor: "#fafafa", cursor: "pointer" }
-                  : { backgroundColor: "#ffffff", cursor: "pointer" };
+                  ? { backgroundColor: '#fafafa', cursor: 'pointer' }
+                  : { backgroundColor: '#ffffff', cursor: 'pointer' };
                 return (
                   <div
                     {...getSuggestionItemProps(suggestion, {
                       className,
-                      style
+                      style,
                     })}
                   >
                     <span>{suggestion.description}</span>
@@ -101,11 +101,11 @@ Search.defaultProps = {
   getInputProps: PropTypes.func.isRequired,
   getSuggestionItemProps: PropTypes.func.isRequired,
   suggestion: PropTypes.array.isRequired,
-  loading: PropTypes.bool
+  loading: PropTypes.bool,
 };
 
 Search.propTypes = {
-  searchPlaces: PropTypes.func.isRequired
+  searchPlaces: PropTypes.func.isRequired,
 };
 
 // Search.propTypes = {

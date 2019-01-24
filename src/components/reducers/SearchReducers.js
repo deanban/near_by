@@ -16,78 +16,78 @@ const initialState = {
   banks: [],
   fetchedBanks: false,
   parks: [],
-  fetchedParks: false
+  fetchedParks: false,
 };
 
 export default function searchReducer(state = initialState, action) {
   switch (action.type) {
-    case "FETCHING_PLACES":
+    case 'FETCHING_PLACES':
       return {
         ...state,
-        searchingForPlaces: true
+        searchingForPlaces: true,
       };
-    case "FETCHED_PLACES":
+    case 'FETCHED_PLACES':
       return {
         ...state,
         recommendedPlaces: action.payload,
-        searchingForPlaces: false
+        searchingForPlaces: false,
       };
-    case "FETCHING_RESTAURANTS":
+    case 'FETCHING_RESTAURANTS':
       return {
         ...state,
-        isFetchingRestaurants: true
+        isFetchingRestaurants: true,
       };
-    case "FETCHING_COFFEE":
+    case 'FETCHING_COFFEE':
       return {
         ...state,
-        isFetchingCoffee: true
+        isFetchingCoffee: true,
       };
-    case "FETCHING_BARS":
+    case 'FETCHING_BARS':
       return {
         ...state,
-        isFetchingBars: true
+        isFetchingBars: true,
       };
-    case "FETCHING_BANKS":
+    case 'FETCHING_BANKS':
       return {
         ...state,
-        isFetchingBanks: true
+        isFetchingBanks: true,
       };
-    case "FETCHING_PARKS":
+    case 'FETCHING_PARKS':
       return {
         ...state,
-        isFetchingParks: true
+        isFetchingParks: true,
       };
-    case "SEARCH_FOR_RESTAURANTS":
+    case 'SEARCH_FOR_RESTAURANTS':
       return {
         ...state,
         restaurants: action.payload,
-        fetchedRestaurants: true
+        fetchedRestaurants: true,
       };
-    case "SEARCH_FOR_COFFEE":
+    case 'SEARCH_FOR_COFFEE':
       return {
         ...state,
         coffee: action.payload,
-        fetchedCoffee: true
+        fetchedCoffee: true,
       };
-    case "SEARCH_FOR_BARS":
+    case 'SEARCH_FOR_BARS':
       return {
         ...state,
         bars: action.payload,
-        fetchedBars: true
+        fetchedBars: true,
       };
-    case "SEARCH_FOR_BANKS":
+    case 'SEARCH_FOR_BANKS':
       return {
         ...state,
         banks: action.payload,
-        fetchedBanks: true
+        fetchedBanks: true,
       };
-    case "SEARCH_FOR_PARKS":
+    case 'SEARCH_FOR_PARKS':
       return {
         ...state,
         parks: action.payload,
-        fetchedParks: true
+        fetchedParks: true,
       };
-    case "CLEAR_PLACES":
+    case 'CLEAR_PLACES':
       return {
         ...state,
         recommendedPlaces: [],
@@ -95,7 +95,7 @@ export default function searchReducer(state = initialState, action) {
         coffee: [],
         bars: [],
         banks: [],
-        parks: []
+        parks: [],
       };
     default:
       return state;
