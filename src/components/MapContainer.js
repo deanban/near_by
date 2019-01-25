@@ -37,21 +37,27 @@ class MapContainer extends Component {
 
     if (prevProps.recommendedPlaces !== recommendedPlaces) {
       this.setState({ places: recommendedPlaces });
+      return null;
     }
     if (prevProps.restaurants !== restaurants) {
       this.setState({ places: restaurants });
+      return null;
     }
     if (prevProps.bars !== bars) {
       this.setState({ places: bars });
+      return null;
     }
     if (prevProps.coffee !== coffee) {
       this.setState({ places: coffee });
+      return null;
     }
     if (prevProps.banks !== banks) {
       this.setState({ places: banks });
+      return null;
     }
     if (prevProps.parks !== parks) {
       this.setState({ places: parks });
+      return null;
     }
   }
 

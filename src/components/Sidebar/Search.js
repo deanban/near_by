@@ -36,7 +36,6 @@ export class Search extends Component {
         const { setAddress, setMercator } = this.props;
         setAddress(address);
         setMercator({ lat, lng });
-        console.log('finished setting add and coords');
       })
       .then(() => {
         const { searchPlaces } = this.props;
@@ -52,7 +51,6 @@ export class Search extends Component {
 
   render() {
     const { address } = this.state;
-    console.log(this.props);
     return (
       <PlacesAutocomplete
         value={address}

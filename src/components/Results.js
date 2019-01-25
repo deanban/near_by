@@ -11,6 +11,7 @@ export default class Results extends Component {
 
     if (prevProps.results.places !== places) {
       this.setState({ places });
+      return null;
     }
     if (prevProps.results.restaurant !== restaurant) {
       this.setState({ places: restaurant });
