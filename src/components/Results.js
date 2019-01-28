@@ -1,9 +1,11 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
+import TrModal from './TrModal';
 
 export default class Results extends Component {
   state = {
     places: [],
+    showModal: false,
   };
 
   getSnapshotBeforeUpdate(prevProps) {
@@ -35,12 +37,23 @@ export default class Results extends Component {
     }
   }
 
+  handleTrClick = () => this.setState({ showModal: true });
+
+  handleCloseModal = () => this.setState({ showModal: false });
+
+  onTrClick = event => (
+    // console.log(event.target.innerHTML);
+    <div>
+      <h3>{event.target.innerHTML}</h3>
+    </div>
+  );
+
   renderPlaces = () =>
     this.state.places.map((place, i) => {
       if (place.type || place.type === 'Recommended Places') {
         return place.items.map((item, i) => (
           <tbody key={item.venue.id}>
-            <tr className="table-secondary">
+            <tr className="table-secondary" onClick={this.handleTrClick}>
               <th scope="row">{item.venue.name}</th>
               <td>
                 <h6>
@@ -49,6 +62,11 @@ export default class Results extends Component {
                 </h6>
               </td>
             </tr>
+            {this.state.showModal ? (
+              <TrModal onClose={this.handleCloseModal}>
+                {this.onTrClick}
+              </TrModal>
+            ) : null}
           </tbody>
         ));
       }
