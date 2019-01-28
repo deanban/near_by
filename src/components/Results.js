@@ -6,6 +6,7 @@ export default class Results extends Component {
   state = {
     places: [],
     showModal: false,
+    placeName: '',
   };
 
   getSnapshotBeforeUpdate(prevProps) {
@@ -37,24 +38,26 @@ export default class Results extends Component {
     }
   }
 
-  handleTrClick = () => this.setState({ showModal: true });
+  handleTrClick = event => {
+    this.setState({ showModal: true, placeName: event.target.innerText });
+  };
 
   handleCloseModal = () => this.setState({ showModal: false });
-
-  onTrClick = event => (
-    // console.log(event.target.innerHTML);
-    <div>
-      <h3>{event.target.innerHTML}</h3>
-    </div>
-  );
 
   renderPlaces = () =>
     this.state.places.map((place, i) => {
       if (place.type || place.type === 'Recommended Places') {
         return place.items.map((item, i) => (
           <tbody key={item.venue.id}>
-            <tr className="table-secondary" onClick={this.handleTrClick}>
-              <th scope="row">{item.venue.name}</th>
+            <tr className="table-secondary">
+              <th scope="row" onClick={this.handleTrClick}>
+                {item.venue.name}
+              </th>
+              {this.state.showModal ? (
+                <TrModal onClose={this.handleCloseModal}>
+                  {this.state.placeName}
+                </TrModal>
+              ) : null}
               <td>
                 <h6>
                   {`${(item.venue.location.distance / 1609.344).toFixed(2)}`}{' '}
@@ -62,18 +65,20 @@ export default class Results extends Component {
                 </h6>
               </td>
             </tr>
-            {this.state.showModal ? (
-              <TrModal onClose={this.handleCloseModal}>
-                {this.onTrClick}
-              </TrModal>
-            ) : null}
           </tbody>
         ));
       }
       return (
         <tbody key={place.id}>
           <tr className="table-secondary">
-            <th scope="row">{place.name}</th>
+            <th scope="row" onClick={this.handleTrClick}>
+              {place.name}
+            </th>
+            {this.state.showModal ? (
+              <TrModal onClose={this.handleCloseModal}>
+                {this.state.placeName}
+              </TrModal>
+            ) : null}
             <td>
               <h6>
                 {`${(place.location.distance / 1609.344).toFixed(2)}`}{' '}

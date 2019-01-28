@@ -8,6 +8,7 @@ export default class TrModal extends Component {
   el = document.createElement('div');
 
   componentDidMount() {
+    console.log(this.props.children);
     modal.appendChild(this.el);
   }
 
