@@ -13,21 +13,15 @@ export default class TrModal extends PureComponent {
   };
 
   componentDidMount() {
-    this.getInfo();
-  }
-
-  getInfo = () => {
-    let placeInfoArr;
-    // console.log(this.props.places);
     this.props.places.map(place => {
       if (place.type || place.type === 'Recommended Places') {
-        placeInfoArr = place.items.filter(
+        const placeInfoArr = place.items.filter(
           item => item.venue.name === this.props.children
         );
         this.setState({ placeInfo: placeInfoArr });
       } else this.setState({ placeInfo: this.props.places });
     });
-  };
+  }
 
   renderModalInfo = ({ placeInfo }) => {
     console.log(placeInfo.length);
@@ -104,4 +98,5 @@ export default class TrModal extends PureComponent {
 TrModal.propTypes = {
   onClose: PropTypes.func.isRequired,
   children: PropTypes.string.isRequired,
+  places: PropTypes.array,
 };
