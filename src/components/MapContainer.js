@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import GoogleMapReact from 'google-map-react';
 import { connect } from 'react-redux';
-import keys from '../keys/keys';
+import GoogleMapReact from 'google-map-react';
 import MapStyle from './MapStyle';
+import keys from '../keys/keys';
 
 const MarkerComponent = () => (
   <i className="fa fa-2x fa-map-marker" aria-hidden="true" />

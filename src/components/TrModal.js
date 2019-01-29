@@ -1,6 +1,9 @@
 import React, { PureComponent } from 'react';
 import ReactDOM from 'react-dom';
 import PropTypes from 'prop-types';
+// import GoogleMapReact from 'google-map-react';
+// import MapStyle from './MapStyle';
+// import keys from '../keys/keys';
 
 const modalRoot = document.getElementById('modal-root');
 
@@ -15,15 +18,44 @@ export default class TrModal extends PureComponent {
 
   getInfo = () => {
     let placeInfoArr;
+    // console.log(this.props.places);
     this.props.places.map(place => {
       if (place.type || place.type === 'Recommended Places') {
         placeInfoArr = place.items.filter(
           item => item.venue.name === this.props.children
         );
-      }
+        this.setState({ placeInfo: placeInfoArr });
+      } else this.setState({ placeInfo: this.props.places });
     });
-    // console.log('TCL: TrModal -> getInfo -> placeInfoArr', placeInfoArr);
-    this.setState({ placeInfo: placeInfoArr });
+  };
+
+  renderModalInfo = ({ placeInfo }) => {
+    console.log(placeInfo.length);
+    if (placeInfo.length === 1) {
+      return placeInfo.map(place => (
+        <div>
+          <h5 key={place.referralId}>
+            {place.venue.location.formattedAddress[0]}
+          </h5>
+          <h6>{place.venue.location.formattedAddress[1]}</h6>
+          <h6>{place.venue.location.formattedAddress[2]}</h6>
+          <hr />
+        </div>
+      ));
+    }
+    if (placeInfo.length > 1) {
+      const newPlaceInfo = placeInfo.filter(
+        place => place.name === this.props.children
+      );
+      return newPlaceInfo.map(place => (
+        <div>
+          <h5 key={place.referralId}>{place.location.formattedAddress[0]}</h5>
+          <h6>{place.location.formattedAddress[1]}</h6>
+          <h6>{place.location.formattedAddress[2]}</h6>
+          <hr />
+        </div>
+      ));
+    }
   };
 
   renderModal = ({ onClose, children }) => (
@@ -58,15 +90,7 @@ export default class TrModal extends PureComponent {
         <h2>{children}</h2>
         <hr />
         <br />
-        {this.state.placeInfo.map(place => (
-          <div>
-            <h5 key={place.referralId}>
-              {place.venue.location.formattedAddress[0]}
-            </h5>
-            <h6>{place.venue.location.formattedAddress[1]}</h6>
-            <h6>{place.venue.location.formattedAddress[2]}</h6>
-          </div>
-        ))}
+        {this.renderModalInfo(this.state)}
       </div>
     </div>
   );
@@ -77,3 +101,7 @@ export default class TrModal extends PureComponent {
     return ReactDOM.createPortal(this.renderModal(this.props), modalRoot);
   }
 }
+TrModal.propTypes = {
+  onClose: PropTypes.func.isRequired,
+  children: PropTypes.string.isRequired,
+};

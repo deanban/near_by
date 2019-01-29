@@ -81,7 +81,7 @@ export default class Results extends Component {
             </td>
           </tr>
           {this.state.showModal ? (
-            <TrModal onClose={this.handleCloseModal}>
+            <TrModal onClose={this.handleCloseModal} places={this.state.places}>
               {this.state.placeName}
             </TrModal>
           ) : null}
