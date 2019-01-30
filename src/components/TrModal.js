@@ -1,19 +1,17 @@
 import React, { PureComponent } from 'react';
 import ReactDOM from 'react-dom';
 import PropTypes from 'prop-types';
-// import GoogleMapReact from 'google-map-react';
-// import MapStyle from './MapStyle';
-import keys from '../keys/keys';
 
 const modalRoot = document.getElementById('modal-root');
 
 export default class TrModal extends PureComponent {
   state = {
     placeInfo: [],
-    venuePics: [],
+    venuePics: []
   };
 
   componentDidMount() {
+    console.log(process.env.REACT_APP_GOOGLE_MAPS);
     this.props.places.map(place => {
       if (place.type || place.type === 'Recommended Places') {
         const placeInfoArr = place.items.filter(
@@ -61,7 +59,7 @@ export default class TrModal extends PureComponent {
         display: 'grid',
         justifyContent: 'center',
         alignItems: 'center',
-        backgroundColor: 'rgba(0,0,0,0.3)',
+        backgroundColor: 'rgba(0,0,0,0.3)'
       }}
       onClick={onClose}
     >
@@ -83,5 +81,5 @@ export default class TrModal extends PureComponent {
 TrModal.propTypes = {
   onClose: PropTypes.func.isRequired,
   children: PropTypes.string.isRequired,
-  places: PropTypes.array,
+  places: PropTypes.array
 };

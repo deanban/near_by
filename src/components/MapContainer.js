@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import GoogleMapReact from 'google-map-react';
 import MapStyle from './MapStyle';
-import keys from '../keys/keys';
+// import keys from '../keys/keys';
 
 const MarkerComponent = () => (
   <i className="fa fa-2x fa-map-marker" aria-hidden="true" />
@@ -13,16 +13,16 @@ class MapContainer extends Component {
   static defaultProps = {
     center: {
       lat: 40.75912125,
-      lng: -74.0042503,
+      lng: -74.0042503
     },
     zoom: 12,
     mapOptions: {
-      styles: MapStyle,
-    },
+      styles: MapStyle
+    }
   };
 
   state = {
-    places: [],
+    places: []
   };
 
   getSnapshotBeforeUpdate(prevProps) {
@@ -32,7 +32,7 @@ class MapContainer extends Component {
       coffee,
       bars,
       banks,
-      parks,
+      parks
     } = this.props;
 
     if (prevProps.recommendedPlaces !== recommendedPlaces) {
@@ -67,7 +67,7 @@ class MapContainer extends Component {
         return place.items.map(item => {
           const RecItemCenter = {
             lat: item.venue.location.lat,
-            lng: item.venue.location.lng,
+            lng: item.venue.location.lng
           };
           return (
             <MarkerComponent
@@ -79,7 +79,7 @@ class MapContainer extends Component {
       }
       const ItemCenter = {
         lat: place.location.lat,
-        lng: place.location.lng,
+        lng: place.location.lng
       };
       return <MarkerComponent key={place.id} defaultCenter={ItemCenter} />;
     });
@@ -92,7 +92,7 @@ class MapContainer extends Component {
         <div style={{ height: '100%', width: '100%' }}>
           <GoogleMapReact
             bootstrapURLKeys={{
-              key: `${keys.google_maps}`,
+              key: `${process.env.GOOGLE_MAPS}`
             }}
             defaultCenter={center}
             defaultZoom={zoom}
@@ -115,7 +115,7 @@ MapContainer.propTypes = {
   coffee: PropTypes.array,
   bars: PropTypes.array,
   banks: PropTypes.array,
-  parks: PropTypes.array,
+  parks: PropTypes.array
 };
 
 const mapStateToProps = state => ({
@@ -124,7 +124,7 @@ const mapStateToProps = state => ({
   coffee: state.places.coffee,
   bars: state.places.bars,
   banks: state.places.banks,
-  parks: state.places.parks,
+  parks: state.places.parks
 });
 
 export default connect(mapStateToProps)(MapContainer);
