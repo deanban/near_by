@@ -97,9 +97,7 @@ class MapContainer extends Component {
             defaultCenter={center}
             defaultZoom={zoom}
             options={mapOptions}
-          >
-            {this.renderMarkers()}
-          </GoogleMapReact>
+          />
         </div>
       </div>
     );
