@@ -65,6 +65,14 @@
   }
 }
 
+/* .card-img-left {
+  border-bottom-left-radius: calc(0.25rem - 1px);
+  border-top-left-radius: calc(0.25rem - 1px);
+  float: left;
+  padding-right: 1em;
+  margin-bottom: -1.25em;
+} */
+
 /* *,
 *:before,
 *:after {

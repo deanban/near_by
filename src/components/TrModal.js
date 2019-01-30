@@ -3,13 +3,14 @@ import ReactDOM from 'react-dom';
 import PropTypes from 'prop-types';
 // import GoogleMapReact from 'google-map-react';
 // import MapStyle from './MapStyle';
-// import keys from '../keys/keys';
+import keys from '../keys/keys';
 
 const modalRoot = document.getElementById('modal-root');
 
 export default class TrModal extends PureComponent {
   state = {
     placeInfo: [],
+    venuePics: [],
   };
 
   componentDidMount() {
@@ -24,7 +25,6 @@ export default class TrModal extends PureComponent {
   }
 
   renderModalInfo = ({ placeInfo }) => {
-    console.log(placeInfo.length);
     if (placeInfo.length === 1) {
       return placeInfo.map(place => (
         <div>
@@ -67,24 +67,13 @@ export default class TrModal extends PureComponent {
       }}
       onClick={onClose}
     >
-      <div
-        style={{
-          padding: 20,
-          background: '#fff',
-          borderRadius: '2px',
-          display: 'inline-block',
-          minHeight: '300px',
-          margin: '1rem',
-          position: 'relative',
-          minWidth: '300px',
-          boxShadow: '0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23)',
-          justifySelf: 'center',
-        }}
-      >
-        <h2>{children}</h2>
-        <hr />
-        <br />
-        {this.renderModalInfo(this.state)}
+      <div className="card" style={{ width: '30rem' }}>
+        <div className="card-body">
+          <h3 className="card-title">{children}</h3>
+          <hr />
+          <br />
+          {this.renderModalInfo(this.state)}
+        </div>
       </div>
     </div>
   );
