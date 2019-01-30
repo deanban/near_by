@@ -27,10 +27,8 @@ export default class TrModal extends PureComponent {
   renderModalInfo = ({ placeInfo }) => {
     if (placeInfo.length === 1) {
       return placeInfo.map(place => (
-        <div>
-          <h5 key={place.referralId}>
-            {place.venue.location.formattedAddress[0]}
-          </h5>
+        <div key={place.referralId}>
+          <h5>{place.venue.location.formattedAddress[0]}</h5>
           <h6>{place.venue.location.formattedAddress[1]}</h6>
           <h6>{place.venue.location.formattedAddress[2]}</h6>
           <hr />
@@ -79,8 +77,6 @@ export default class TrModal extends PureComponent {
   );
 
   render() {
-    // this.getInfo();
-    console.log(this.state);
     return ReactDOM.createPortal(this.renderModal(this.props), modalRoot);
   }
 }

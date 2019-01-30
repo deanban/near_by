@@ -18,23 +18,18 @@ export default class Results extends Component {
     }
     if (prevProps.results.restaurant !== restaurant) {
       this.setState({ places: restaurant });
-      return null;
     }
     if (prevProps.results.bar !== bar) {
       this.setState({ places: bar });
-      return null;
     }
     if (prevProps.results.coffee !== coffee) {
       this.setState({ places: coffee });
-      return null;
     }
     if (prevProps.results.bank !== bank) {
       this.setState({ places: bank });
-      return null;
     }
     if (prevProps.results.park !== park) {
       this.setState({ places: park });
-      return null;
     }
   }
 

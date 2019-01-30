@@ -57,7 +57,7 @@ class MapContainer extends Component {
     }
     if (prevProps.parks !== parks) {
       this.setState({ places: parks });
-      return null;
+      // return null;
     }
   }
 
