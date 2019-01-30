@@ -1,4 +1,4 @@
-// import keys from '../../keys/keys';
+import keys from '../../keys/keys';
 
 function fetchingPlaces() {
   return {
@@ -87,9 +87,9 @@ export const searchPlaces = (coords, filterByType) => dispatch => {
 
     fetch(
       `https://api.foursquare.com/v2/venues/search?ll=${formattedCoords}&client_id=${
-        process.env.FOURSQ_CLIENT_ID
+        keys.foursq_client_id
       }&client_secret=${
-        process.env.FOURSQ_CLIENT_SECRET
+        keys.foursq_client_secret
       }&query=${filterByType}&venuePhotos=1&radius=350&sortByDistance=1&limit=5&v=${version}`
     )
       .then(result => result.json())
@@ -115,9 +115,9 @@ export const searchPlaces = (coords, filterByType) => dispatch => {
     const formattedCoords = Object.values(coords).join(',');
     fetch(
       `https://api.foursquare.com/v2/venues/explore?ll=${formattedCoords}&client_id=${
-        process.env.FOURSQ_CLIENT_ID
+        keys.foursq_client_id
       }&client_secret=${
-        process.env.FOURSQ_CLIENT_SECRET
+        keys.foursq_client_secret
       }&venuePhotos=1&radius=350&sortByDistance=1&limit=5&v=${version}`
     )
       .then(result => result.json())

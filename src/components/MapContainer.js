@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import GoogleMapReact from 'google-map-react';
 import MapStyle from './MapStyle';
-// import keys from '../keys/keys';
+import keys from '../keys/keys';
 
 const MarkerComponent = () => (
   <i className="fa fa-2x fa-map-marker" aria-hidden="true" />
@@ -92,7 +92,7 @@ class MapContainer extends Component {
         <div style={{ height: '100%', width: '100%' }}>
           <GoogleMapReact
             bootstrapURLKeys={{
-              key: `${process.env.GOOGLE_MAPS}`
+              key: `${keys.google_maps}`
             }}
             defaultCenter={center}
             defaultZoom={zoom}

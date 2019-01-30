@@ -11,7 +11,6 @@ export default class TrModal extends PureComponent {
   };
 
   componentDidMount() {
-    console.log(process.env.REACT_APP_GOOGLE_MAPS);
     this.props.places.map(place => {
       if (place.type || place.type === 'Recommended Places') {
         const placeInfoArr = place.items.filter(
@@ -25,10 +24,8 @@ export default class TrModal extends PureComponent {
   renderModalInfo = ({ placeInfo }) => {
     if (placeInfo.length === 1) {
       return placeInfo.map(place => (
-        <div>
-          <h5 key={place.referralId}>
-            {place.venue.location.formattedAddress[0]}
-          </h5>
+        <div key={place.referralId}>
+          <h5>{place.venue.location.formattedAddress[0]}</h5>
           <h6>{place.venue.location.formattedAddress[1]}</h6>
           <h6>{place.venue.location.formattedAddress[2]}</h6>
           <hr />
@@ -40,8 +37,8 @@ export default class TrModal extends PureComponent {
         place => place.name === this.props.children
       );
       return newPlaceInfo.map(place => (
-        <div>
-          <h5 key={place.referralId}>{place.location.formattedAddress[0]}</h5>
+        <div key={place.referralId}>
+          <h5>{place.location.formattedAddress[0]}</h5>
           <h6>{place.location.formattedAddress[1]}</h6>
           <h6>{place.location.formattedAddress[2]}</h6>
           <hr />
@@ -78,7 +75,6 @@ export default class TrModal extends PureComponent {
 
   render() {
     // this.getInfo();
-    console.log(this.state);
     return ReactDOM.createPortal(this.renderModal(this.props), modalRoot);
   }
 }
