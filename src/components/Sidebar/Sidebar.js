@@ -1,7 +1,7 @@
 import React from 'react';
 import Search from './Search';
 import Filterby from './Filterby';
-import SearchWrapper from '../Header/SearchWrapper';
+import SearchWrapper from '../Layout/SearchWrapper';
 
 const Sidebar = () => (
   <div>

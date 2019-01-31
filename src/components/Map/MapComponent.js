@@ -1,5 +1,5 @@
 import React from 'react';
-import { compose, withProps } from 'recompose';
+import { compose, withProps, withPropsOnChange } from 'recompose';
 import {
   withScriptjs,
   withGoogleMap,
@@ -32,9 +32,37 @@ const MapComponent = compose(
     defaultZoom={props.zoom}
     defaultCenter={props.center}
   >
-    {props.isMarkerShown && (
-      <Marker position={props.center} onClick={props.onMarkerClick} />
-    )}
+    {props.isMarkerShown
+      ? props.items.map(item => {
+          if (item.type && item.type === 'Recommended Places') {
+            return item.items.map(item => {
+              let itemCenter = {
+                lat: item.venue.location.lat,
+                lng: item.venue.location.lng
+              };
+              return (
+                <Marker
+                  key={item.venue.id}
+                  position={itemCenter}
+                  onClick={props.onMarkerClick}
+                />
+              );
+            });
+          } else {
+            let itemCenter = {
+              lat: item.location.lat,
+              lng: item.location.lng
+            };
+            return (
+              <Marker
+                key={item.id}
+                position={itemCenter}
+                onClick={props.onMarkerClick}
+              />
+            );
+          }
+        })
+      : null}
   </GoogleMap>
 ));
 

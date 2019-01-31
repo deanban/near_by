@@ -5,13 +5,75 @@ import MapComponent from './MapComponent';
 
 class MapContainer extends React.PureComponent {
   state = {
-    isMarkerShown: false
+    isMarkerShown: false,
+    places: [],
+    items: []
   };
 
   componentDidMount() {
     this.delayedShowMarker();
   }
 
+  getSnapshotBeforeUpdate(prevProps) {
+    const {
+      recommendedPlaces,
+      restaurants,
+      bars,
+      coffee,
+      banks,
+      parks
+    } = this.props;
+
+    if (prevProps.recommendedPlaces !== recommendedPlaces) {
+      this.setState({ places: recommendedPlaces });
+      return recommendedPlaces;
+    }
+    if (prevProps.restaurants !== restaurants) {
+      this.setState({ places: restaurants });
+      return restaurants;
+    }
+    if (prevProps.bars !== bars) {
+      this.setState({ places: bars });
+      return bars;
+    }
+    if (prevProps.coffee !== coffee) {
+      this.setState({ places: coffee });
+      return coffee;
+    }
+    if (prevProps.banks !== banks) {
+      this.setState({ places: banks });
+      return banks;
+    }
+    if (prevProps.parks !== parks) {
+      this.setState({ places: parks });
+      return parks;
+    }
+  }
+
+  placeMarkers = () => {
+    const { places } = this.state;
+    let arr = [];
+    if (places.length === 1) {
+      places.map(place => {
+        if (place.type && place.type === 'Recommended Places') {
+          this.setState({ items: place.items });
+          // arr.push(
+          //   place.items.reduce(
+          //     (acc, x) => [
+          //       Object.values(x.venue.name).join(''),
+          //       Object.values(x.venue.location.labeledLatLngs)
+          //     ],
+          //     []
+          //   )
+          // );
+        }
+      });
+    }
+
+    this.setState({ items: places });
+  };
+
+  //just to test marker click
   delayedShowMarker = () => {
     setTimeout(() => {
       this.setState({ isMarkerShown: true });
@@ -24,8 +86,12 @@ class MapContainer extends React.PureComponent {
   };
 
   render() {
+    this.placeMarkers();
+    console.log(this.state);
+
     return (
       <MapComponent
+        items={this.state.items}
         isMarkerShown={this.state.isMarkerShown}
         onMarkerClick={this.handleMarkerClick}
       />
