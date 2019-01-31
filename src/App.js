@@ -18,7 +18,7 @@ class App extends Component {
             <Header />
             <Sidebar />
             <ResultContainer />
-            <MapContainer />
+            <MapContainer isMarkerShown />
             <Footer />
           </div>
         </div>

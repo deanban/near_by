@@ -1,4 +1,51 @@
-import React, { Component } from 'react';
+import React from 'react';
+import { compose, withProps } from 'recompose';
+import {
+  withScriptjs,
+  withGoogleMap,
+  GoogleMap,
+  Marker
+} from 'react-google-maps';
+import { connect } from 'react-redux';
+import PropTypes from 'prop-types';
+import keys from '../keys/keys';
+import MapStyle from './MapStyle';
+
+const MapContainer = compose(
+  withProps({
+    googleMapURL: `https://maps.googleapis.com/maps/api/js?key=${
+      keys.google_maps
+    }&v=3.exp&libraries=geometry,drawing,places`,
+    loadingElement: <div style={{ height: `100%` }} />,
+    containerElement: <div style={{ height: `100%` }} />,
+    mapElement: <div style={{ height: `100%` }} />
+  }),
+  withScriptjs,
+  withGoogleMap
+)(props => (
+  <GoogleMap
+    mapStyles={MapStyle}
+    defaultZoom={8}
+    defaultCenter={{ lat: -34.397, lng: 150.644 }}
+  >
+    {props.isMarkerShown && (
+      <Marker position={{ lat: -34.397, lng: 150.644 }} />
+    )}
+  </GoogleMap>
+));
+
+const mapStateToProps = state => ({
+  recommendedPlaces: state.places.recommendedPlaces,
+  restaurants: state.places.restaurants,
+  coffee: state.places.coffee,
+  bars: state.places.bars,
+  banks: state.places.banks,
+  parks: state.places.parks
+});
+
+export default connect(mapStateToProps)(MapContainer);
+
+/*import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import GoogleMapReact from 'google-map-react';
@@ -125,4 +172,4 @@ const mapStateToProps = state => ({
   parks: state.places.parks
 });
 
-export default connect(mapStateToProps)(MapContainer);
+export default connect(mapStateToProps)(MapContainer);*/
