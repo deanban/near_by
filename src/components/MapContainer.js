@@ -11,28 +11,63 @@ import PropTypes from 'prop-types';
 import keys from '../keys/keys';
 import MapStyle from './MapStyle';
 
-const MapContainer = compose(
+const MapComponent = compose(
   withProps({
     googleMapURL: `https://maps.googleapis.com/maps/api/js?key=${
       keys.google_maps
     }&v=3.exp&libraries=geometry,drawing,places`,
     loadingElement: <div style={{ height: `100%` }} />,
     containerElement: <div className="map" />,
-    mapElement: <div style={{ height: `100%` }} />
+    mapElement: <div style={{ height: `100%` }} />,
+    center: {
+      lat: 40.75912125,
+      lng: -74.0042503
+    },
+    zoom: 12
   }),
   withScriptjs,
   withGoogleMap
 )(props => (
   <GoogleMap
     defaultOptions={{ styles: MapStyle }}
-    defaultZoom={8}
-    defaultCenter={{ lat: -34.397, lng: 150.644 }}
+    defaultZoom={props.zoom}
+    defaultCenter={props.center}
   >
     {props.isMarkerShown && (
-      <Marker position={{ lat: -34.397, lng: 150.644 }} />
+      <Marker position={props.center} onClick={props.onMarkerClick} />
     )}
   </GoogleMap>
 ));
+
+class MapContainer extends React.PureComponent {
+  state = {
+    isMarkerShown: false
+  };
+
+  componentDidMount() {
+    this.delayedShowMarker();
+  }
+
+  delayedShowMarker = () => {
+    setTimeout(() => {
+      this.setState({ isMarkerShown: true });
+    }, 3000);
+  };
+
+  handleMarkerClick = () => {
+    this.setState({ isMarkerShown: false });
+    this.delayedShowMarker();
+  };
+
+  render() {
+    return (
+      <MapComponent
+        isMarkerShown={this.state.isMarkerShown}
+        onMarkerClick={this.handleMarkerClick}
+      />
+    );
+  }
+}
 
 const mapStateToProps = state => ({
   recommendedPlaces: state.places.recommendedPlaces,
