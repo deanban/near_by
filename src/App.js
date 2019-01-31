@@ -2,11 +2,11 @@ import React, { Component } from 'react';
 import './App.css';
 import { Provider } from 'react-redux';
 
-import Header from './components/Header/Header';
+import Header from './components/Layout/Header';
 import Sidebar from './components/Sidebar/Sidebar';
-import ResultContainer from './components/ResultContainer';
-import MapContainer from './components/MapContainer';
-import Footer from './components/Footer';
+import ResultContainer from './components/Results/ResultContainer';
+import MapContainer from './components/Map/MapContainer';
+import Footer from './components/Layout/Footer';
 import store from './components/store/store';
 
 class App extends Component {
