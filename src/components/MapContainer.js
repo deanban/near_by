@@ -17,14 +17,14 @@ const MapContainer = compose(
       keys.google_maps
     }&v=3.exp&libraries=geometry,drawing,places`,
     loadingElement: <div style={{ height: `100%` }} />,
-    containerElement: <div style={{ height: `100%` }} />,
+    containerElement: <div className="map" />,
     mapElement: <div style={{ height: `100%` }} />
   }),
   withScriptjs,
   withGoogleMap
 )(props => (
   <GoogleMap
-    mapStyles={MapStyle}
+    defaultOptions={{ styles: MapStyle }}
     defaultZoom={8}
     defaultCenter={{ lat: -34.397, lng: 150.644 }}
   >
