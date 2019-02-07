@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import PlacesAutocomplete, {
   geocodeByAddress,
-  getLatLng,
+  getLatLng
 } from 'react-places-autocomplete';
 import Spinner from '../../Spinner';
 
@@ -15,7 +15,7 @@ export class Search extends Component {
     address: '',
     lat: null,
     lng: null,
-    err: null,
+    err: null
   };
 
   handleChange = address => {
@@ -28,7 +28,7 @@ export class Search extends Component {
       .then(latLng => {
         this.setState(state => ({
           lat: latLng.lat,
-          lng: latLng.lng,
+          lng: latLng.lng
         }));
       })
       .then(_ => {
@@ -44,7 +44,7 @@ export class Search extends Component {
       })
       .catch(error =>
         this.setState({
-          err: error,
+          err: error
         })
       );
   };
@@ -62,10 +62,9 @@ export class Search extends Component {
             <input
               {...getInputProps({
                 placeholder: 'Search Places ...',
-                className: 'location-search-input',
+                className: 'location-search-input'
               })}
             />
-
             <div className="autocomplete-dropdown-container">
               {loading && <Spinner />}
               {suggestions.map(suggestion => {
@@ -80,7 +79,7 @@ export class Search extends Component {
                   <div
                     {...getSuggestionItemProps(suggestion, {
                       className,
-                      style,
+                      style
                     })}
                   >
                     <span>{suggestion.description}</span>
@@ -99,11 +98,11 @@ Search.defaultProps = {
   getInputProps: PropTypes.func.isRequired,
   getSuggestionItemProps: PropTypes.func.isRequired,
   suggestion: PropTypes.array.isRequired,
-  loading: PropTypes.bool,
+  loading: PropTypes.bool
 };
 
 Search.propTypes = {
-  searchPlaces: PropTypes.func.isRequired,
+  searchPlaces: PropTypes.func.isRequired
 };
 
 // Search.propTypes = {

@@ -1,10 +1,16 @@
 import React from 'react';
-import { compose, withProps, withPropsOnChange } from 'recompose';
+import {
+  compose,
+  withProps,
+  withPropsOnChange,
+  withStateHandlers
+} from 'recompose';
 import {
   withScriptjs,
   withGoogleMap,
   GoogleMap,
-  Marker
+  Marker,
+  InfoWindow
 } from 'react-google-maps';
 
 import keys from '../../keys/keys';
@@ -22,13 +28,30 @@ const MapComponent = compose(
       lat: 40.75912125,
       lng: -74.0042503
     },
-    zoom: 12
+    zoom: 12,
+    mapStyle: MapStyle
   }),
+  withStateHandlers(
+    () => ({
+      isOpen: false,
+      openInfoWindowMarkerId: ''
+    }),
+    {
+      onToggleOpen: ({ isOpen }) => () => ({
+        isOpen: !isOpen
+      })
+    },
+    {
+      handleToggleOpen: id => () => ({
+        openInfoWindowMarkerId: id
+      })
+    }
+  ),
   withScriptjs,
   withGoogleMap
 )(props => (
   <GoogleMap
-    defaultOptions={{ styles: MapStyle }}
+    defaultOptions={{ styles: props.mapStyle }}
     defaultZoom={props.zoom}
     defaultCenter={props.center}
   >
@@ -36,20 +59,41 @@ const MapComponent = compose(
       ? props.items.map(item => {
           if (item.type && item.type === 'Recommended Places') {
             return item.items.map(item => {
-              let itemCenter = {
+              const itemCenter = {
                 lat: item.venue.location.lat,
                 lng: item.venue.location.lng
               };
+              console.log(item);
+              const [
+                name,
+                address,
+                city
+              ] = item.venue.location.formattedAddress;
               return (
                 <Marker
                   key={item.venue.id}
                   position={itemCenter}
-                  onClick={props.onMarkerClick}
-                />
+                  onClick={props.onToggleOpen}
+                >
+                  {props.isOpen && (
+                    <InfoWindow
+                      onCloseClick={props.onToggleOpen}
+                      position={itemCenter}
+                    >
+                      <div key={item.referralId}>
+                        <h4>{item.venue.name}</h4>
+                        <hr />
+                        <h5>{name}</h5>
+                        <h6>{address}</h6>
+                        <h6>{city}</h6>
+                      </div>
+                    </InfoWindow>
+                  )}
+                </Marker>
               );
             });
           } else {
-            let itemCenter = {
+            const itemCenter = {
               lat: item.location.lat,
               lng: item.location.lng
             };
@@ -57,8 +101,14 @@ const MapComponent = compose(
               <Marker
                 key={item.id}
                 position={itemCenter}
-                onClick={props.onMarkerClick}
-              />
+                onClick={props.onToggleOpen}
+              >
+                {props.isOpen && (
+                  <InfoWindow onCloseClick={props.onToggleOpen}>
+                    <i className="fas fa-anchor" />
+                  </InfoWindow>
+                )}
+              </Marker>
             );
           }
         })

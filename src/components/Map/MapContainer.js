@@ -2,16 +2,20 @@ import React from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import MapComponent from './MapComponent';
+import { InfoWindow } from 'react-google-maps';
 
 class MapContainer extends React.PureComponent {
   state = {
     isMarkerShown: false,
     places: [],
-    items: []
+    items: [],
+    openInfoWindowMarkerId: '',
+    isOpen: false
   };
 
   componentDidMount() {
     this.delayedShowMarker();
+    this.showInfoWindow();
   }
 
   getSnapshotBeforeUpdate(prevProps) {
@@ -52,7 +56,7 @@ class MapContainer extends React.PureComponent {
 
   placeMarkers = () => {
     const { places } = this.state;
-    let arr = [];
+    // let arr = [];
     if (places.length === 1) {
       places.map(place => {
         if (place.type && place.type === 'Recommended Places') {
@@ -73,6 +77,17 @@ class MapContainer extends React.PureComponent {
     this.setState({ items: places });
   };
 
+  // toggleInfoWindow = loc => {
+  //   // clicking 'x' in the info window will pass null, so if we detect that, reset the position in state
+  //   if (loc == null) {
+  //     this.setState({ windowPosition: null });
+  //     return;
+  //   }
+  //   // otherwise get coords of clicked marker and set to state
+  //   let markerLoc = { lat: loc.lat, lng: loc.lng };
+  //   this.setState({ windowPosition: markerLoc });
+  // };
+
   //just to test marker click
   delayedShowMarker = () => {
     setTimeout(() => {
@@ -80,9 +95,30 @@ class MapContainer extends React.PureComponent {
     }, 1000);
   };
 
-  handleMarkerClick = () => {
-    this.setState({ isMarkerShown: false });
+  handleCloseClick = () => {
+    this.setState({ isOpen: false });
+  };
+
+  showInfoWindow = () => {
+    return (
+      this.state.isOpen && (
+        <InfoWindow onCloseClick={this.handleCloseClick}>
+          <div>
+            <h2>Infowindow</h2>
+          </div>
+        </InfoWindow>
+      )
+    );
+  };
+
+  handleMarkerClick = id => {
+    this.setState({
+      isMarkerShown: false,
+      openInfoWindowMarkerId: id,
+      isOpen: true
+    });
     this.delayedShowMarker();
+    this.showInfoWindow();
   };
 
   render() {
@@ -94,6 +130,8 @@ class MapContainer extends React.PureComponent {
         items={this.state.items}
         isMarkerShown={this.state.isMarkerShown}
         onMarkerClick={this.handleMarkerClick}
+        /*onClose={this.toggleInfoWindow}
+    position={this.state.windowPosition}*/
       />
     );
   }

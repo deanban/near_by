@@ -23,14 +23,17 @@ export default class TrModal extends PureComponent {
 
   renderModalInfo = ({ placeInfo }) => {
     if (placeInfo.length === 1) {
-      return placeInfo.map(place => (
-        <div key={place.referralId}>
-          <h5>{place.venue.location.formattedAddress[0]}</h5>
-          <h6>{place.venue.location.formattedAddress[1]}</h6>
-          <h6>{place.venue.location.formattedAddress[2]}</h6>
-          <hr />
-        </div>
-      ));
+      return placeInfo.map(place => {
+        const [name, address, city] = place.venue.location.formattedAddress;
+        return (
+          <div key={place.referralId}>
+            <h5>{name}</h5>
+            <h6>{address}</h6>
+            <h6>{city}</h6>
+            <hr />
+          </div>
+        );
+      });
     }
     if (placeInfo.length > 1) {
       const newPlaceInfo = placeInfo.filter(
