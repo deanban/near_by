@@ -1,10 +1,5 @@
 import React from 'react';
-import {
-  compose,
-  withProps,
-  withPropsOnChange,
-  withStateHandlers
-} from 'recompose';
+import { compose, withProps, withStateHandlers } from 'recompose';
 import {
   withScriptjs,
   withGoogleMap,
@@ -63,11 +58,10 @@ const MapComponent = compose(
                 lat: item.venue.location.lat,
                 lng: item.venue.location.lng
               };
-              console.log(item);
               const [
-                name,
                 address,
-                city
+                city,
+                country
               ] = item.venue.location.formattedAddress;
               return (
                 <Marker
@@ -83,9 +77,9 @@ const MapComponent = compose(
                       <div key={item.referralId}>
                         <h4>{item.venue.name}</h4>
                         <hr />
-                        <h5>{name}</h5>
-                        <h6>{address}</h6>
+                        <h5>{address}</h5>
                         <h6>{city}</h6>
+                        <h6>{country}</h6>
                       </div>
                     </InfoWindow>
                   )}
@@ -97,6 +91,7 @@ const MapComponent = compose(
               lat: item.location.lat,
               lng: item.location.lng
             };
+            const [address, city, country] = item.location.formattedAddress;
             return (
               <Marker
                 key={item.id}
@@ -105,7 +100,13 @@ const MapComponent = compose(
               >
                 {props.isOpen && (
                   <InfoWindow onCloseClick={props.onToggleOpen}>
-                    <i className="fas fa-anchor" />
+                    <div key={item.referralId}>
+                      <h4>{item.name}</h4>
+                      <hr />
+                      <h5>{address}</h5>
+                      <h6>{city}</h6>
+                      <h6>{country}</h6>
+                    </div>
                   </InfoWindow>
                 )}
               </Marker>

@@ -123,7 +123,6 @@ class MapContainer extends React.PureComponent {
 
   render() {
     this.placeMarkers();
-    console.log(this.state);
 
     return (
       <MapComponent
